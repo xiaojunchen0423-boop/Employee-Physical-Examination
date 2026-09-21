@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026年度员工体检方案对比分析</title>
+<style>
+  :root{
+    --ruici:#2563eb; --ruici-bg:#eff6ff;
+    --gy:#0891b2; --gy-bg:#ecfeff;
+    --zj:#7c3aed; --zj-bg:#f5f3ff;
+    --ink:#1e293b; --muted:#64748b; --line:#e2e8f0; --bg:#f8fafc;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;padding:32px 16px}
+  .wrap{max-width:1180px;margin:0 auto;background:#fff;border-radius:16px;box-shadow:0 4px 24px rgba(15,23,42,.06);overflow:hidden}
+  header{background:linear-gradient(120deg,#1e3a8a,#2563eb 55%,#0891b2);color:#fff;padding:40px 44px}
+  header h1{font-size:27px;font-weight:700;letter-spacing:.5px}
+  header p{margin-top:10px;font-size:14px;opacity:.9}
+  .body{padding:36px 44px 44px}
+  h2{font-size:20px;margin:38px 0 18px;padding-left:12px;border-left:5px solid var(--ruici)}
+  h2:first-child{margin-top:0}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin:14px 0 6px}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:center;vertical-align:middle}
+  th{background:#f1f5f9;font-weight:600;color:#334155}
+  td:first-child,th:first-child{text-align:left;font-weight:600}
+  tbody tr:nth-child(even){background:#fafbfc}
+  .c-yes{color:#16a34a;font-weight:700}
+  .c-no{color:#94a3b8}
+  .c-best{background:#f0fdf4;color:#15803d;font-weight:700}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:16px 0}
+  .card{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .card .hd{padding:14px 16px;color:#fff;font-weight:700;font-size:16px}
+  .hd.r{background:var(--ruici)} .hd.g{background:var(--gy)} .hd.z{background:var(--zj)}
+  .card .bd{padding:16px}
+  .card ul{list-style:none;font-size:13.5px}
+  .card li{margin:8px 0;padding-left:18px;position:relative}
+  .card li::before{content:"•";position:absolute;left:0;font-weight:700}
+  .card .pro li::before{color:#16a34a}
+  .card .con li::before{color:#dc2626}
+  .con-title{margin-top:14px;font-size:12.5px;font-weight:700;color:#dc2626;letter-spacing:1px}
+  .note{background:#f8fafc;border:1px dashed var(--line);border-radius:10px;padding:14px 18px;font-size:13px;color:var(--muted);margin-top:20px}
+  .summary{background:linear-gradient(120deg,#f0f7ff,#eefcfb);border:1px solid #d6e9f8;border-radius:12px;padding:18px 22px;margin:0 0 30px}
+  .s-item{font-size:13.5px;line-height:1.75;margin:7px 0;color:#334155}
+  .s-item:first-child{margin-top:0}
+  .s-item:last-child{margin-bottom:0}
+  .s-k{display:inline-block;min-width:62px;margin-right:10px;padding:2px 10px;border-radius:20px;background:#fff;border:1px solid #cfe3f5;color:#185FA5;font-size:12px;font-weight:700;text-align:center}
+  .lead{font-size:13px;color:var(--muted);margin:10px 0 4px;line-height:1.7}
+  .same{font-size:13px;color:#475569;background:#f8fafc;border-left:3px solid #cbd5e1;border-radius:0 8px 8px 0;padding:11px 16px;margin:10px 0 0;line-height:1.75}
+  .same strong{color:#334155}
+
+  /* ---- 报价单折叠面板 ---- */
+  .q-wrap{margin:14px 0 6px}
+  .q-panel{border:1px solid var(--line);border-radius:12px;margin:0 0 12px;overflow:hidden;background:#fff}
+  .q-panel summary{display:flex;align-items:center;gap:12px;padding:15px 18px;cursor:pointer;list-style:none;
+    background:#f8fafc;font-size:15px;font-weight:700;color:#1e293b;user-select:none;transition:background .15s}
+  .q-panel summary:hover{background:#f1f5f9}
+  .q-panel summary::-webkit-details-marker{display:none}
+  .q-panel[open] summary{background:#eff6ff;border-bottom:1px solid var(--line)}
+  .q-dot{width:9px;height:9px;border-radius:50%;flex:0 0 9px}
+  .q-dot.r{background:var(--ruici)} .q-dot.g{background:var(--gy)} .q-dot.z{background:var(--zj)}
+  .q-ttl{flex:1 1 auto;min-width:0}
+  .q-cnt{font-size:12px;font-weight:600;color:#185FA5;background:#e6f1fb;border-radius:20px;
+    padding:2px 10px;flex:0 0 auto}
+  .q-arrow{font-size:13px;color:var(--muted);transition:transform .2s;flex:0 0 auto}
+  .q-panel[open] .q-arrow{transform:rotate(180deg)}
+  .q-body{padding:16px 18px 18px}
+  .q-price{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 14px}
+  .q-price span{flex:1 1 150px;background:linear-gradient(120deg,#f0f7ff,#eefcfb);border:1px solid #d6e9f8;
+    border-radius:9px;padding:10px 14px;font-size:15px;font-weight:700;color:#042C53;text-align:center}
+  .q-price b{display:block;font-size:11.5px;font-weight:600;color:#185FA5;margin-bottom:3px;letter-spacing:.3px}
+  .q-table{font-size:12.5px;margin:0 0 4px;table-layout:fixed}
+  .q-table th,.q-table td{padding:7px 9px;line-height:1.6;word-break:break-word}
+  .q-table th{background:#f1f5f9;font-size:12px;position:sticky;top:0;z-index:1}
+  .q-table td:first-child,.q-table th:first-child{text-align:left;font-weight:400}
+  .q-table .q-nm{font-weight:600;color:#1e293b;text-align:left}
+  .q-table .q-gp{color:var(--muted);font-size:11.5px;text-align:left}
+  .q-table .q-mn{color:#475569;font-size:11.5px;text-align:left}
+  .q-table .q-grp{color:#185FA5;font-weight:600;font-size:11.5px;text-align:left;background:#fafcff}
+  .q-cat td{background:#eff6ff;color:#185FA5;font-weight:700;font-size:12.5px;text-align:left;letter-spacing:.3px}
+  .q-total td{background:#fff7ed;color:#993C1D;font-weight:700}
+  .q-sub{font-size:12px;font-weight:700;color:#334155;margin:16px 0 8px;padding-left:9px;
+    border-left:3px solid var(--ruici)}
+  .q-notes,.q-warn{list-style:none;font-size:12.5px;line-height:1.8;margin:0;padding:0}
+  .q-notes li{color:#475569;padding-left:16px;position:relative;margin:5px 0}
+  .q-notes li::before{content:"·";position:absolute;left:4px;font-weight:700;color:#94a3b8}
+  .q-warn li{color:#A32D2D;padding-left:16px;position:relative;margin:5px 0;background:#fff5f5;
+    border-radius:6px;padding:7px 12px 7px 26px}
+  .q-warn li::before{content:"!";position:absolute;left:10px;top:7px;font-weight:800}
+  .q-src{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);font-size:11.5px;color:var(--muted)}
+  @media(max-width:820px){.q-table{font-size:11.5px}.q-table th,.q-table td{padding:6px 5px}}
+  sup{font-size:10px;color:var(--muted);vertical-align:super}
+  .note strong{color:#334155}
+  .foot{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+  #shotbar{position:sticky;bottom:0;z-index:99;margin:0 -44px -44px;padding:14px 44px;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-top:1px solid var(--line);display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  #shotBtn{cursor:pointer;border:none;border-radius:10px;background:linear-gradient(120deg,#2563eb,#0891b2);color:#fff;font-size:15px;font-weight:700;padding:11px 22px;box-shadow:0 4px 14px rgba(37,99,235,.28);transition:.2s}
+  #shotBtn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(37,99,235,.36)}
+  #shotBtn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+  #shotTip{font-size:13px;color:var(--muted)}
+  @media print{
+    #shotbar{display:none}
+  }
+  @media(max-width:820px){.cards{grid-template-columns:1fr}.body,header{padding-left:20px;padding-right:20px}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>2026年度员工体检方案对比分析</h1>
+    <p>瑞慈体检 600/680 元档 · 广医二院 · 珠江医院 ｜ 呈报用</p>
+  </header>
+  <div class="body">
+
+    <div class="summary">
+      <div class="s-item"><span class="s-k">价格</span>瑞慈三档均为最低（600/600/680 元）；广医二院居中（1,180/1,263/1,723 元）；珠江最高（1,320/1,420/1,869 元）。</div>
+      <div class="s-item"><span class="s-k">独家项目</span>瑞慈独家含冠脉钙化积分；广医二院独家含 EB 病毒抗体（鼻咽癌早筛）。</div>
+      <div class="s-item"><span class="s-k">机构属性</span>广医二院、珠江医院为三甲公立；瑞慈为民营专业体检连锁。</div>
+      <div class="s-item"><span class="s-k">待确认</span>广医二院已婚档隐含折扣 8.80 折（非统一 9 折）；珠江医院报价单男士小计疑漏计前列腺彩超 125 元。</div>
+    </div>
+
+    <h2>一、三家报价总览</h2>
+    <table>
+      <thead><tr><th>人群</th><th>瑞慈 600档</th><th>广医二院</th><th>珠江医院</th></tr></thead>
+      <tbody>
+        <tr><td>男</td><td class="c-best">600 元</td><td>1,180 元</td><td>1,320 元</td></tr>
+        <tr><td>女未婚</td><td class="c-best">600 元</td><td>1,263 元</td><td>1,420 元</td></tr>
+        <tr><td>女已婚</td><td class="c-best">680 元</td><td>1,723 元</td><td>1,869 元</td></tr>
+      </tbody>
+    </table>
+
+    <h2>二、核心项目覆盖对比</h2>
+    <p class="lead">下表仅列示三家存在差异的项目；三家完全一致的共有项已归并至表下说明，以便聚焦区分点。</p>
+    <table>
+      <thead><tr><th>筛查维度</th><th>瑞慈 600档</th><th>广医二院</th><th>珠江医院</th></tr></thead>
+      <tbody>
+        <tr><td>肺部CT（早期肺癌）</td><td class="c-yes">低剂量 ✓</td><td>普通平扫</td><td class="c-yes">低剂量 ✓<sup>注1</sup></td></tr>
+        <tr><td>冠脉钙化积分（冠心病早筛）</td><td class="c-best">独家</td><td class="c-no">✗</td><td class="c-no">✗</td></tr>
+        <tr><td>EB病毒抗体（鼻咽癌）</td><td class="c-no">✗</td><td class="c-best">独家</td><td class="c-no">✗</td></tr>
+        <tr><td>眼底镜 + 裂隙灯</td><td class="c-yes">✓</td><td class="c-no">✗</td><td class="c-yes">✓</td></tr>
+        <tr><td>肿瘤标志物（男 / 女未婚 / 女已婚）</td><td>5 / 5 / 5 项</td><td>5 / 3 / 3 项<sup>注2</sup></td><td>5 / 5 / 5 项</td></tr>
+        <tr><td>妇科（内诊 / 白带 / TCT / HPV）</td><td>4 项：内诊+白带3项+TCT+HPV16/18</td><td>未婚：内诊+白带8项<br>已婚：加TCT+HPV</td><td>4 项：内诊+白带3项+TCT+HPV16/18</td></tr>
+        <tr><td>影像 / 超声类项目数</td><td>9 项</td><td>8 项</td><td>9 项</td></tr>
+        <tr><td>生化检验类项目</td><td>8 项肝功 + 5 项血脂 + 3 项肾功</td><td>8 项肝功 + 4 项血脂 + 3 项肾功</td><td>8 项肝功 + 5 项血脂 + 3 项肾功</td></tr>
+        <tr><td>报告线上查 + 电话解读</td><td class="c-yes">报价含（增值服务清单）</td><td class="c-no">报价单未承诺</td><td class="c-no">报价单未承诺</td></tr>
+        <tr><td>增值服务条目</td><td class="c-best">17 项</td><td>—</td><td>—</td></tr>
+        <tr><td>机构性质</td><td>民营专业体检连锁</td><td class="c-yes">三甲公立</td><td class="c-yes">三甲公立</td></tr>
+      </tbody>
+    </table>
+    <p class="same">
+      <strong>三家完全一致的项目（不计入差异）：</strong>静态心电图、口腔科、甲功三项、13C呼气试验（幽门螺杆菌）、
+      颈动脉彩超、甲状腺彩超、乳腺彩超（仅女性）、肝功 8 项、妇科 4 项（女已婚）、肾功 3 项、空腹血糖、血/尿常规。
+    </p>
+    <p class="lead">
+      说明：三份报价单的表格结构不同（广医二院将内科、外科、耳鼻喉科、眼科、口腔合并为一行计价；
+      瑞慈与珠江逐项列名，并对未包含项标注「/」），因此「总项目数」无法用统一口径直接比较。
+      上表所列条目均可从各报价单逐行清点，不含估算。
+    </p>
+
+    <h2>三、三家的亮点与注意点</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="hd r">瑞慈 600档</div>
+        <div class="bd">
+          <ul class="pro">
+            <li>三档均为最低价：比广医低 580 / 663 / 1,043 元，比珠江低 720 / 820 / 1,189 元</li>
+            <li>独家含冠脉钙化积分（冠心病早筛）</li>
+            <li>独家含眼底镜 + 裂隙灯、低剂量肺 CT</li>
+            <li>增值服务 17 项：线上报告、电话解读、阳性追踪、多年报告对比</li>
+            <li>高管 5 名免费升级 VIP 检区；前台加项 5 折、家属同价</li>
+          </ul>
+          <div class="con-title">注意点</div>
+          <ul class="con">
+            <li>无 EB 病毒抗体（鼻咽癌早筛缺失）</li>
+            <li>白带仅常规 3 项，细度不如广医二院（白带 8 项）</li>
+            <li>民营专业体检连锁，非三甲公立</li>
+            <li>泌尿系超声仅前列腺，不含输尿管（广医含双肾、膀胱、输尿管）</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="hd g">广医二院</div>
+        <div class="bd">
+          <ul class="pro">
+            <li>独家含 EB 病毒抗体（鼻咽癌早筛，两广地区高发）</li>
+            <li>三甲公立医院（广州医科大学附属第二医院）</li>
+            <li>妇科最全：未婚即含白带 8 项，已婚另加 TCT + HPV</li>
+            <li>泌尿系超声含双肾、膀胱、输尿管（另两家仅前列腺）</li>
+            <li>价格居中：三档均低于珠江（低 139 / 157 / 146 元）</li>
+          </ul>
+          <div class="con-title">注意点</div>
+          <ul class="con">
+            <li>无冠脉钙化积分、无眼底镜 + 裂隙灯</li>
+            <li>胸部 CT 为普通平扫，非低剂量</li>
+            <li>肿瘤标志物较少（男 5 项 / 女性 3 项）</li>
+            <li>报价单未含线上报告解读与电话解读服务</li>
+            <li>已婚档隐含折扣 8.80 折，与统一 9 折口径不符，需书面确认</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="hd z">珠江医院</div>
+        <div class="bd">
+          <ul class="pro">
+            <li>三甲公立医院（南方医科大学珠江医院）</li>
+            <li>含低剂量肺 CT + 眼科全套（眼底镜 + 裂隙灯）+ 口腔</li>
+            <li>影像/超声类项目 9 项，肿瘤标志物 5 / 5 / 5 项</li>
+          </ul>
+          <div class="con-title">注意点</div>
+          <ul class="con">
+            <li>三档均为最高价：比瑞慈贵 720 / 820 / 1,189 元，比广医贵 139 / 157 / 146 元</li>
+            <li>无冠脉钙化积分、无 EB 病毒抗体</li>
+            <li>妇科 4 项、肝功 8 项、肿瘤标志物 5 / 5 / 5，均与瑞慈同名同项，无额外覆盖</li>
+            <li>报价单男士小计疑漏计前列腺彩超 125 元（逐项相加 1,671.47 vs 小计 1,546.47）</li>
+            <li>低剂量肺 CT 备注栏为「胸部 CT 平扫 + 薄层【不含胶片】」，口径与瑞慈不一致</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <h2>附：三家报价单原始明细（点击展开）</h2>
+    <p class="lead">以下为三家机构报价单的逐项摘录，点击标题即可展开核对。所有数据均直接取自原始报价单文件，未作增删或换算。</p>
+    <div class="q-wrap">
+    <details class="q-panel">
+      <summary>
+        <span class="q-dot r"></span>
+        <span class="q-ttl">瑞慈体检中心</span>
+        <span class="q-cnt">67 个项目</span>
+        <span class="q-arrow">▾</span>
+      </summary>
+      <div class="q-body">
+        <div class="q-price"><span><b>男性</b>600 元</span><span><b>女性未婚</b>600 元</span><span><b>女性已婚</b>680 元</span></div>
+        <table class="q-table"><thead><tr><th>项目</th><th>项目内容</th><th>检测意义</th><th>男性</th><th>女性未婚</th><th>女性已婚</th></tr></thead><tbody><tr class="q-cat"><td colspan="6">基础检查项目</td></tr><tr><td class="q-nm">一般A：身高,体重,体重指数BMI,血压</td><td class="q-gp">一般检查</td><td class="q-mn">通过仪器测量人体身高、体重及血压，科学判断体重是否标准、血压是否正常，并且为相关科室的诊断提供重要的依据。</td><td>1</td><td>1</td><td>1</td></tr><tr><td class="q-nm">内科A：营养,面容,心脏,肺部,腹部，肝脏，脾脏</td><td class="q-gp">内科检查</td><td class="q-mn">通过体格检查，检查心、肺、腹部等器官及部位的基本状况,发现常见疾病的相关征兆或初步排除常见疾病。</td><td>2</td><td>2</td><td>2</td></tr><tr><td class="q-nm">外科B：皮肤,浅表淋巴结,甲状腺,脊柱,四肢关节，乳房，肛门指诊，前列腺，外生殖器</td><td class="q-gp">外科检查</td><td class="q-mn">通过体格检查，检查皮肤,浅表淋巴结,甲状腺,乳房,脊柱,四肢关节,肛门指诊,泌尿生殖系等脏器基本情况，发现常见外科疾病的相关征兆，或初步排除外科常见疾病。</td><td>3</td><td>3</td><td>3</td></tr><tr><td class="q-nm">眼科C:视力,外眼,眼底镜,裂隙灯检查</td><td class="q-gp">眼科检查</td><td class="q-mn">了解视力状况,眼外观是否正常，通过眼底镜检查眼底视网膜、视神经、视乳头和视网膜中央血管等有无异常情况，通过裂隙灯检查巩膜、虹膜、角膜、瞳孔、玻璃体、晶体等有无异常情况。</td><td>1</td><td>1</td><td>1</td></tr><tr><td class="q-nm">耳鼻、口咽</td><td class="q-gp">耳鼻喉检查</td><td class="q-mn">通过对耳、鼻、咽、扁桃体的常规检查，初步筛查相关常见疾病。</td><td>1</td><td>1</td><td>1</td></tr><tr><td class="q-nm">牙体,牙周,口腔粘膜,颌面部</td><td class="q-gp">口腔科检查</td><td class="q-mn">主要检查有无牙周病、牙结石、龋齿、缺牙等口腔疾病。</td><td>1</td><td>1</td><td>1</td></tr><tr><td class="q-nm">妇科内诊</td><td class="q-gp">妇科检查</td><td class="q-mn">通过妇科体格检查，检查阴道、子宫、附件、盆腔等脏器基本情况，发现常见妇科疾病的相关征兆，或初步排除妇科常见疾病。</td><td>/</td><td>/</td><td>1</td></tr><tr><td class="q-nm">白带常规3项</td><td class="q-gp"></td><td class="q-mn">了解阴道清洁度情况及妇科炎症，如：外阴阴道假丝酵母菌病、滴虫性阴道炎等均具有重要的意义。</td><td>/</td><td>/</td><td>1</td></tr><tr><td class="q-nm">子宫颈抹片检查（液基超薄细胞检测,TCT）</td><td class="q-gp"></td><td class="q-mn">筛查宫颈早期病变较先进的检测方法，同时还能发现部分微生物感染如假丝酵母菌、滴虫等。</td><td>/</td><td>/</td><td>1</td></tr><tr><td class="q-nm">人乳头瘤病毒(HPV16/18-DNA)定性</td><td class="q-gp"></td><td class="q-mn">16型和18型高危型人乳头瘤病毒感染的辅助诊断，发现宫颈癌的高危人群。</td><td>/</td><td>/</td><td>1</td></tr><tr class="q-cat"><td colspan="6">生化检查项目</td></tr><tr><td class="q-nm">血常规18项/22项</td><td class="q-gp">血尿常规</td><td class="q-mn">通过血液常规检测，检查白细胞、红细胞、血色素、血小板等指标来反映身体状况，如：贫血、感染、血液系统疾病、物理化学因素损伤等。</td><td>1</td><td>1</td><td>1</td></tr><tr><td class="q-nm">尿常规15项</td><td class="q-gp"></td><td class="q-mn">筛查泌尿系统疾病简单并且准确的方法。如泌尿系统感染、肿瘤、结石及了解肾功能，还可用于协助检查其他系统疾病，如糖尿病、肾炎等。</td><td>1</td><td>1</td><td>1</td></tr><tr><td class="q-nm">空腹血糖（GLU）</td><td class="q-gp">糖尿病筛查</td><td class="q-mn">评价人体空腹状态下糖代谢是否正常，评估糖尿病受检者空腹血糖控制是否达标。空腹血糖是评估糖代谢紊乱的常用和重要指标。</td><td>1</td><td>1</td><td>1</td></tr><tr><td class="q-nm">尿素（Urea）</td><td class="q-gp">肾功能三项</td><td class="q-mn">血清尿素是人体蛋白质的代谢产物，主要是经肾脏滤过而随尿液排出体外，当肾功能损害时，体内代谢产物堆积，血液中血清尿素浓度增加，此时血清中尿素氮数值升高，因此通过测定尿素，可了解肾脏功能。</td><td>2</td><td>2</td><td>2</td></tr><tr><td class="q-nm">肌酐（Cr）</td><td class="q-gp"></td><td class="q-mn">血清肌酐浓度可在一定程度上准确反映肾脏滤过功能的损害程度。肾功能正常时，肌酐排出率恒定，当肾实质受到损害时，肾脏的滤过率就会降低。当滤过率降低到一定程度后，血肌酐浓度就会急剧上升。</td><td>3</td><td>3</td><td>3</td></tr><tr><td class="q-nm">尿酸（UA）</td><td class="q-gp"></td><td class="q-mn">尿酸是体内嘌呤代谢的终末产物。主要经肾脏排泄，因而测定尿酸能够了解肾脏的功能，增高见于：痛风、肾脏病变、恶性肿瘤等。</td><td>4</td><td>4</td><td>4</td></tr><tr><td class="q-nm">丙氨酸氨基转移酶（ALT）</td><td class="q-gp">肝功能</td><td class="q-mn">是检查肝脏损害最灵敏的检查项目</td><td>5</td><td>5</td><td>5</td></tr><tr><td class="q-nm">天门冬氨酸氨基转移酶（AST）</td><td class="q-gp"></td><td class="q-mn">肝脏,肌肉及心肌损害时升高</td><td>6</td><td>6</td><td>6</td></tr><tr><td class="q-nm">γ-谷氨酰转移酶（GGT</td><td class="q-gp"></td><td class="q-mn">最常用于筛检肝脏机能障碍、肝硬化及酒精性肝损害</td><td>7</td><td>7</td><td>7</td></tr><tr><td class="q-nm">碱性磷酸酶（ALP）</td><td class="q-gp"></td><td class="q-mn">增高时多为肝胆、骨骼及甲状旁腺疾患</td><td>8</td><td>8</td><td>8</td></tr><tr><td class="q-nm">ALT/AST</td><td class="q-gp"></td><td class="q-mn">当天门冬氨酸氨基转移酶（AST）明显升高时，天门冬氨酸氨基转移酶（AST）/丙氨酸氨基转移酶（ALT）大于1时，提示有肝实质的广泛损害，预后不良。</td><td>9</td><td>9</td><td>9</td></tr><tr><td class="q-nm">总胆红素（TBIL）</td><td class="q-gp"></td><td class="q-mn">总胆红素高值时可能有肝胆系统或溶血性疾病</td><td>10</td><td>10</td><td>10</td></tr><tr><td class="q-nm">直接胆红素（DBIL）</td><td class="q-gp"></td><td class="q-mn">直接胆红素高值时可能有肝胆系统疾病</td><td>11</td><td>11</td><td>11</td></tr><tr><td class="q-nm">间接胆红素（IBIL）</td><td class="q-gp"></td><td class="q-mn">间接胆红素高值时可能有溶血性黄疸。</td><td>12</td><td>12</td><td>12</td></tr><tr><td class="q-nm">总蛋白(TPO)</td><td class="q-gp"></td><td class="q-mn">用于检查营养状态，肝、肾功能，合并感染症等。</td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">白蛋白(ALB)</td><td class="q-gp"></td><td class="q-mn">肝脏疾病、营养失调等情况时白蛋白会減少。</td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">球蛋白(GLO)</td><td class="q-gp"></td><td class="q-mn">在感染、肝病、肾病、自身免疫疾病时会发生增減。</td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">胆碱酯酶CHE</td><td class="q-gp"></td><td class="q-mn">增高代表高脂蛋白血症、脂肪肝、肾脏病变、肥胖症等。</td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">乳酸脱氢酶LDH</td><td class="q-gp"></td><td class="q-mn">体内能量代谢过程中的一个重要的酶</td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">腺苷脱氨酶ADA</td><td class="q-gp"></td><td class="q-mn">肝功中的一种酶，如偏高要注意肝功能损害等情况。</td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">白蛋白/球蛋白(A/G)</td><td class="q-gp"></td><td class="q-mn">重症慢性肝炎、肝硬化时，白蛋白、球胆白比值降低。</td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">总胆固醇(TC)</td><td class="q-gp">血脂五项</td><td class="q-mn">血清中胆固醇含量过高易引起脂肪肝、动脉硬化、脑中风、胆结石等疾病。</td><td>9</td><td>9</td><td>9</td></tr><tr><td class="q-nm">甘油三酯（TG）</td><td class="q-gp"></td><td class="q-mn">来自脂类及碳水化合物(米饭,面包等谷类)，当数值偏高则易患动脉硬化、心肌梗塞、肥胖症、脂肪肝等疾病。</td><td>10</td><td>10</td><td>10</td></tr><tr><td class="q-nm">高密度脂蛋白胆固醇（HDL-CHO）</td><td class="q-gp"></td><td class="q-mn">对血管有保护作用，血中含量低则易患血管硬化。</td><td>11</td><td>11</td><td>11</td></tr><tr><td class="q-nm">低密度脂蛋白胆固醇（LDL-CHO）</td><td class="q-gp"></td><td class="q-mn">越高越不好，是检测动脉硬化的重要指标。</td><td>12</td><td>12</td><td>12</td></tr><tr><td class="q-nm">动脉粥样硬化指数</td><td class="q-gp"></td><td class="q-mn">当AI≥4异常。数值越大动脉硬化的程度越重，发生心脑血管的危险性越高。</td><td>13</td><td>13</td><td>13</td></tr><tr><td class="q-nm">癌胚抗原（CEA）定量</td><td class="q-gp">肿瘤标志物七项男/女</td><td class="q-mn">是一种广谱的肿瘤标志物，常用于消化道筛肠癌的筛查。</td><td>14</td><td>14</td><td>14</td></tr><tr><td class="q-nm">甲胎蛋白（AFP）定量</td><td class="q-gp"></td><td class="q-mn">是目前临床上诊断肝癌的重要指标(筛查肝癌时最好配合腹部B超检查)。</td><td>15</td><td>15</td><td>15</td></tr><tr><td class="q-nm">癌抗原19-9（CA19-9）</td><td class="q-gp"></td><td class="q-mn">CA19-9是筛查胰腺癌的重要肿瘤标志物，此外胃肠道、肝胆和某些妇科肿瘤也可以增高。CA50主要用于胰腺及消化道肿瘤筛查，多数情况下其灵敏度略逊于CA19-9。所以通常情况下这两种肿瘤标志物可以仅选用CA19-9进行检查。适合消化道肿瘤筛查</td><td>16</td><td>16</td><td>16</td></tr><tr><td class="q-nm">糖类抗原50(CA50)</td><td class="q-gp"></td><td class="q-mn">是一种广谱肿瘤标志物。动态监测对判断癌肿瘤疗效及预后判断、复发检测颇具价值，对鉴别良恶性胸、腹水也有价值。</td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">癌抗原15-3（CA15-3）</td><td class="q-gp"></td><td class="q-mn">乳腺癌的首选标志物，其他如转移性卵巢癌、结肠癌、肝癌、胆管癌、胰腺癌、肺癌等也有不同程度的增高。</td><td>/</td><td>18</td><td>18</td></tr><tr><td class="q-nm">癌抗原125（CA125）（女）</td><td class="q-gp"></td><td class="q-mn">是重要的卵巢癌肿瘤标志物，其他非卵巢恶性肿瘤也有一定的阳性率，如乳腺癌40%、胰腺癌50%、胃癌47%、肺癌44%、结肠直肠癌32%、其他妇科肿瘤43%。对于肺癌患者，CA125的阳性率随肺癌分期进展而明显升高，临床研究表明[1]：肺癌I期阳性率为7.8%，II期阳性率为18.6%，III期为32.5%，IV期为53.9%，总体阳性率为26.9%</td><td>/</td><td>19</td><td>19</td></tr><tr><td class="q-nm">人绒毛膜促性腺激素β亚单位B-HCG</td><td class="q-gp"></td><td class="q-mn">早孕、异位妊娠、女性生殖系统肿瘤及绒癌术后随访指标；睾丸肿瘤等。</td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">前列腺特异性抗原(T-PSA)</td><td class="q-gp"></td><td class="q-mn">前列腺癌与良性前列腺疾病之间的T-PSA浓度分布有一定的重叠性(4-10ug/l),故前列腺癌早期单测T-PSA诊断意义不大，若联合F-PSA检测，用F-PSA/ T-PSA的比值对判断前列腺肿瘤的性质有重大的价值，F/T比值小于10%提示有前列腺癌，F/T比值大于25%提示前列腺增生</td><td>19</td><td>/</td><td>/</td></tr><tr><td class="q-nm">游离前列腺特异性抗原(F-PSA)</td><td class="q-gp"></td><td class="q-mn"></td><td>20</td><td>/</td><td>/</td></tr><tr><td class="q-nm">铁蛋白SF</td><td class="q-gp"></td><td class="q-mn">检测血清铁蛋白是缺铁性贫血诊断的重要依据,也是恶性肿瘤的标志物之一</td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">三碘甲状腺原氨酸（T3）</td><td class="q-gp">甲功三项</td><td class="q-mn">用于诊断甲亢、甲减，并作为甲状腺肿瘤术后治疗监测。</td><td>47</td><td>47</td><td>47</td></tr><tr><td class="q-nm">甲状腺素（T4）</td><td class="q-gp"></td><td class="q-mn"></td><td>48</td><td>48</td><td>48</td></tr><tr><td class="q-nm">促甲状腺素（TSH）</td><td class="q-gp"></td><td class="q-mn"></td><td>49</td><td>49</td><td>49</td></tr><tr><td class="q-nm">C13呼气试验(HP)</td><td class="q-gp">胃功能检查</td><td class="q-mn">碳13-尿素呼气试验阳性示有幽门螺杆菌感染，它与胃部炎症、消化性溃疡、胃癌的发生密切关联。该方法具有无痛、快速、准确的特点。</td><td>1</td><td>1</td><td>1</td></tr><tr><td class="q-nm">肌酸激酶（CK）</td><td class="q-gp">心血管检测</td><td class="q-mn">它在器官中的含量依次为:骨骼肌、心肌、脑、胃肠平滑肌等，临床上该酶主要用于诊断心肌梗塞，在心肌梗塞后2～4小时,血清此酶活力开始增高,可达正常高限的12倍,但持续时间短,2～4天恢复正常;如再次升高,往往说明再次梗塞。CK-MB在急性心梗3.5h既开始升高，是心肌酶中升高最早的指标，在临床诊断中有十分重要的意义，为早期诊断急性心肌梗塞的一项敏感指标。</td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">肌酸激酶同工酶（CK-MB）</td><td class="q-gp"></td><td class="q-mn"></td><td>/</td><td>/</td><td>/</td></tr><tr class="q-cat"><td colspan="6">超声检查项目</td></tr><tr><td class="q-nm">低剂量肺部CT</td><td class="q-gp">CT</td><td class="q-mn">低辐射剂量胸部扫描，辐射剂量仅为常规CT的20％左右。低剂量螺旋CT对肺部筛查有助于发现早期肺癌，特别是周围型肺癌，其诊出率约为胸片的10倍。因其较少的辐射剂量，有效的降低了医源性辐射引起的恶性病变的风险。</td><td>1</td><td>1</td><td>1</td></tr><tr><td class="q-nm">冠状动脉钙化积分</td><td class="q-gp"></td><td class="q-mn">提早干预冠心病早筛风险评估项目</td><td>1</td><td>1</td><td>1</td></tr><tr><td class="q-nm">头颅MRI</td><td class="q-gp">磁共振扫描MRI</td><td class="q-mn">对常见的颅脑血管疾病、颅内肿瘤等进行初步筛查，头颅MRI检查一般无颅骨伪影，脑灰白质信号对比度高，使得头颅MRI检查优于CT。</td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">肝胆脾胰肾超声检查</td><td class="q-gp">彩超检查</td><td class="q-mn">通过彩色超声仪器对人体肝脏、胆囊、脾脏、胰脏、双肾进行检测,是否有无形态学改变及占位性病变（肿瘤，结石，炎症等）。</td><td>1</td><td>1</td><td>1</td></tr><tr><td class="q-nm">男科前列腺超声波检查（男）</td><td class="q-gp"></td><td class="q-mn">通过彩色超声波仪器检测前列腺有无肿块及其他病变。</td><td>1</td><td>/</td><td>/</td></tr><tr><td class="q-nm">妇科腹部超声检查（女未婚）</td><td class="q-gp"></td><td class="q-mn">通过彩色超声波仪器检测子宫及附件有无病变。</td><td>/</td><td>1</td><td>/</td></tr><tr><td class="q-nm">妇科阴道超声检查（女已婚）</td><td class="q-gp"></td><td class="q-mn">通过彩色超声波仪器检测子宫及附件有无病变。</td><td>/</td><td>/</td><td>1</td></tr><tr><td class="q-nm">乳房超声检查（女）</td><td class="q-gp"></td><td class="q-mn">通过彩色超声波仪器检测乳腺有无肿块及其他病变。</td><td>/</td><td>1</td><td>1</td></tr><tr><td class="q-nm">甲状腺超声检查</td><td class="q-gp"></td><td class="q-mn">通过彩色超声仪器对人体甲状腺进行检测,是否有无形态学改变及占位性病变（肿大、结节、腺瘤及肿瘤等）。</td><td>1</td><td>1</td><td>1</td></tr><tr><td class="q-nm">颈动脉超声检查</td><td class="q-gp"></td><td class="q-mn">通过彩色超声仪器来检测有无动脉粥样硬化情况及颈动脉情况。</td><td>1</td><td>1</td><td>1</td></tr><tr><td class="q-nm">心脏超声检查</td><td class="q-gp"></td><td class="q-mn">通过彩色超声仪器能动态显示心腔内结构、心脏搏动和各瓣膜的血流情况，是诊断各种心脏病的重要手段之一。</td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">动脉硬化</td><td class="q-gp">动脉硬化检测</td><td class="q-mn">为临床动脉硬化、动脉炎、血管闭塞和糖尿病足等提供可靠检查方法，也可辅助检查周身血管中的血栓情况。</td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">静态心电图检查(ECG)</td><td class="q-gp">心电图</td><td class="q-mn">通过在体表特定部位同步记录和分析心脏每一个心动周期所产生电活动变化的曲线图形，为心脏疾病诊断、疗效评价、预后评估提供重要的依据。</td><td>1</td><td>1</td><td>1</td></tr><tr class="q-cat"><td colspan="6">附加项目</td></tr><tr><td class="q-nm">健康早餐</td><td class="q-gp">健康餐</td><td class="q-mn">营养早餐</td><td>1</td><td>2</td><td>3</td></tr><tr><td class="q-nm">电子报告</td><td class="q-gp">体检报告</td><td class="q-mn">含电子胶片</td><td>1</td><td>2</td><td>3</td></tr></tbody></table>
+        <div class="q-sub">增值服务清单（报价单「增值服务」表）</div><table class="q-table"><thead><tr><th>类别</th><th>内容</th><th>说明</th></tr></thead><tbody><tr><td class="q-nm">高管服务</td><td class="q-mn">提供 5 个名额高管体检，升级 VIP 检区。</td><td>无偿</td></tr><tr><td class="q-nm">自动化排检系统</td><td class="q-mn">升级后的自动化排检系统能最大程度节省体检、排队等候时间，不会出现插队、漏检（前台规定等候不超过 15 分钟，且不主动推加项）。</td><td>无偿</td></tr><tr><td class="q-nm">医院绿色就医通道</td><td class="q-mn">广东省第二人民医院、广州医学院附属第二医院等多家三甲级医疗机构，也包括上海及日本就医协调。</td><td>无偿</td></tr><tr><td class="q-nm">免费下午「查」</td><td class="q-mn">每月定期开展超声、胸部 CT 下午免费复查专场（腹部彩超、心脏彩超除外），以海报形式通知到单位。</td><td>无偿（广佛）</td></tr><tr><td class="q-nm">检前提醒短信</td><td class="q-mn">预约成功后发送提醒短信到手机（预约时间、地点、检前注意事项、咨询电话等）。</td><td>无偿</td></tr><tr><td class="q-nm">报告线上解读</td><td class="q-mn">微信/支付宝小程序点击报告解读；热线电话专家坐席 5-20 分钟详尽解读。</td><td>无偿</td></tr><tr><td class="q-nm">报告线下解读</td><td class="q-mn">体检中心现场专家解读。</td><td>无偿</td></tr><tr><td class="q-nm">健康档案管理</td><td class="q-mn">体检完成后健康档案大数据可供下载，查看往年体检数据进行健康档案对比。</td><td>无偿</td></tr><tr><td class="q-nm">阳性追踪</td><td class="q-mn">发现重大阳性员工，进行不低于 3 次短信及电话提醒复诊，实行追访机制。</td><td>无偿</td></tr><tr><td class="q-nm">专业团检报告</td><td class="q-mn">团检汇总报告：数据分析、健康管理建议、历年对比分析、下一年套餐调整建议（协商确定，有前置条件）。</td><td>无偿</td></tr><tr><td class="q-nm">重疾首责告知</td><td class="q-mn">对检出的重要阳性或可疑重大疾病，由专门医护人员第一时间通知并随访跟踪。</td><td>无偿</td></tr><tr><td class="q-nm">多年报告对比</td><td class="q-mn">微信/支付宝可一键找回多年体检报告，并在小程序上做多年报告对比。</td><td>无偿</td></tr></tbody></table>
+        <div class="q-sub">报价单条款与说明（原文摘录）</div>
+        <ul class="q-notes"><li>前台加项享 5 折优惠，家属与员工享受同样套餐优惠。</li><li>联系人：李嘉豪 15914472619（按报价单原文）</li><li>内部优惠价：男性 600 元 / 女性未婚 600 元 / 女性已婚 680 元。</li><li>表中「/」表示该人群不包含此项；数字为该机构的项目编号。</li></ul>
+        <div class="q-src">数据来源：瑞慈体检中心报价单，逐项摘录，未作增删。</div>
+      </div>
+    </details>
+    <details class="q-panel">
+      <summary>
+        <span class="q-dot g"></span>
+        <span class="q-ttl">广州医科大学附属第二医院</span>
+        <span class="q-cnt">25 个项目</span>
+        <span class="q-arrow">▾</span>
+      </summary>
+      <div class="q-body">
+        <div class="q-price"><span><b>男性</b>1,180.20 元</span><span><b>女性未婚</b>1,262.99 元</span><span><b>女性已婚</b>1,722.91 元</span></div>
+        <table class="q-table"><thead><tr><th>体检项目</th><th>男性</th><th>女性未婚</th><th>女性已婚</th></tr></thead><tbody><tr class="q-cat"><td colspan="4">体格检查</td></tr><tr><td>身高体重</td><td>赠送</td><td>赠送</td><td>赠送</td></tr><tr><td>内科（血压、心肺、听诊、腹部触诊）.外科（皮肤、甲状腺、颈部淋巴结、四肢关节、脊柱）.耳鼻喉科（耳、鼻、喉）、眼科（视力、辨色力、外眼）口腔检查</td><td>50</td><td>50</td><td>50</td></tr><tr class="q-cat"><td colspan="4">检验项目</td></tr><tr><td>尿常规定量</td><td>29.44</td><td>29.44</td><td>29.44</td></tr><tr><td>血常规五分类</td><td>18.4</td><td>18.4</td><td>18.4</td></tr><tr><td>肝功8项：丙氨酸氨基转移酶、天门冬氨酸氨基转移酶、谷氨酰基转移酶、碱性磷酸酶、总蛋白、白蛋白、总胆红素、直接胆红素、间接胆红素</td><td>40.5</td><td>40.5</td><td>40.5</td></tr><tr><td>肾功3项：肌酐、尿酸、尿素</td><td>18.4</td><td>18.4</td><td>18.4</td></tr><tr><td>血脂4项：总胆固醇、甘油三脂、高密度脂蛋白胆固醇、低密度脂蛋白胆固醇</td><td>29.44</td><td>29.44</td><td>29.44</td></tr><tr><td>空腹血糖</td><td>5.52</td><td>5.52</td><td>5.52</td></tr><tr><td>甲功能3项</td><td>141.68</td><td>141.68</td><td>141.68</td></tr><tr><td>碳13呼气试验（体检前两周禁止吃胃药或抗生素药）</td><td>120</td><td>120</td><td>120</td></tr><tr class="q-cat"><td colspan="4">肿瘤项目</td></tr><tr><td>肿瘤3项：甲胎蛋白AFP、癌胚抗原CEA、CA199（化学发光法） （结肠癌、胰腺癌等肿瘤的早期预警筛查指标）</td><td>120</td><td>120</td><td>120</td></tr><tr><td>前列腺抗原2项测定TPSA、FPSA（前列腺的早期预警筛查指标）</td><td>100</td><td>/</td><td>/</td></tr><tr><td>EB病毒抗体 （鼻咽癌的早期预警筛查指标）</td><td>18.4</td><td>18.4</td><td>18.4</td></tr><tr class="q-cat"><td colspan="4">影像和功能检查</td></tr><tr><td>CT胸部平扫</td><td>286</td><td>286</td><td>286</td></tr><tr><td>心电图（多导联）</td><td>30</td><td>30</td><td>30</td></tr><tr><td>黑白超：消化系统（肝胆脾胰）</td><td>45</td><td>45</td><td>45</td></tr><tr><td>黑白超：泌尿系统（双肾、膀胱、输尿管）男性：含前列腺</td><td>45</td><td>45</td><td>45</td></tr><tr><td>黑白超：女性生殖（子宫、附件）/经阴道</td><td>/</td><td>45</td><td>65</td></tr><tr><td>彩超：甲状腺</td><td>125</td><td>125</td><td>125</td></tr><tr><td>彩超：乳腺</td><td>/</td><td>125</td><td>125</td></tr><tr><td>彩超：双侧颈动脉</td><td>70</td><td>70</td><td>70</td></tr><tr class="q-cat"><td colspan="4">妇科检查</td></tr><tr><td>妇科常规检查</td><td>/</td><td>赠送</td><td>赠送</td></tr><tr><td>白带8项</td><td>/</td><td>23.1</td><td>23.1</td></tr><tr><td>液基细胞学检测</td><td>/</td><td>/</td><td>216</td></tr><tr><td>人乳头瘤细胞学检测HPV</td><td>/</td><td>/</td><td>317</td></tr><tr class="q-total"><td>价格小计</td><td>1292.78</td><td>1385.88</td><td>1938.88</td></tr><tr class="q-total"><td>材料费（抽血+材料）</td><td>16.7</td><td>15.7</td><td>16.7</td></tr><tr class="q-total"><td>最终价格</td><td>1180.202</td><td>1262.992</td><td>1722.9144</td></tr></tbody></table>
+        
+        <div class="q-sub">报价单条款与说明（原文摘录）</div>
+        <ul class="q-notes"><li>以上价格均参照市物价局、卫生局、财政局、社保局 2017 年印发的《广州市非营利性医疗机构医疗服务价格》有关规定制定，来院体检者提供早餐一份（蛋糕或炒粉、鸡蛋、牛奶）。</li><li>由于在体检准备时是按照所有员工均参加体检进行物品准备的，部分物品不能重新使用；而且套餐优惠价格设定时考虑到会有员工不能进行所有项目检查，所以，只要参加套餐体检即使未检完，也按套餐优惠价收取。</li><li>体检费用待贵单位（广州聚客网络科技有限公司）员工体检之日起一个月后按医院提供的实检人数单位统一结账。</li><li>备注：B 超疑似重大异常者需采图。</li><li>报价单确认日期：2026-9-21。表中「/」表示该人群不包含此项；「赠送」表示不另行收费。</li></ul><ul class="q-warn"><li>计算口径：原价 × 9 折 + 材料费。男性 1292.78×0.9+16.7 = 1180.202 ✓；女性未婚 1385.88×0.9+15.7 = 1262.992 ✓；女性已婚 1938.88×0.9+16.7 = 1761.692，但报价单标注 1722.9144，差 38.78 元（隐含 8.80 折）。建议签约前书面确认。</li></ul>
+        <div class="q-src">数据来源：广医二院报价单，逐项摘录，未作增删。</div>
+      </div>
+    </details>
+    <details class="q-panel">
+      <summary>
+        <span class="q-dot z"></span>
+        <span class="q-ttl">南方医科大学珠江医院</span>
+        <span class="q-cnt">51 个项目</span>
+        <span class="q-arrow">▾</span>
+      </summary>
+      <div class="q-body">
+        <div class="q-price"><span><b>男性</b>1,319.56 元</span><span><b>女性未婚</b>1,419.56 元</span><span><b>女性已婚</b>1,869.10 元</span></div>
+        <table class="q-table"><thead><tr><th>项目</th><th>项目内容</th><th>检测意义</th><th>男性</th><th>女性未婚</th><th>女性已婚</th></tr></thead><tbody><tr class="q-cat"><td colspan="6">基础检查项目</td></tr><tr><td class="q-nm">一般A：身高,体重,体重指数BMI,血压</td><td class="q-gp"></td><td class="q-mn">通过仪器测量人体身高、体重及血压，科学判断体重是否标准、血压是否正常，并且为相关科室的诊断提供重要的依据。</td><td>赠送</td><td>赠送</td><td>赠送</td></tr><tr><td class="q-nm">内科A：营养,面容,心脏,肺部,腹部，肝脏，脾脏</td><td class="q-gp"></td><td class="q-mn">通过体格检查，检查心、肺、腹部等器官及部位的基本状况,发现常见疾病的相关征兆或初步排除常见疾病。</td><td>47</td><td>47</td><td>47</td></tr><tr><td class="q-nm">外科B：皮肤,浅表淋巴结,甲状腺,脊柱,四肢关节，乳房，肛门指诊，前列腺，外生殖器</td><td class="q-gp"></td><td class="q-mn">通过体格检查，检查皮肤,浅表淋巴结,甲状腺,乳房,脊柱,四肢关节,肛门指诊,泌尿生殖系等脏器基本情况，发现常见外科疾病的相关征兆，或初步排除外科常见疾病。</td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">眼科C:视力,外眼,眼底镜,裂隙灯检查</td><td class="q-gp"></td><td class="q-mn">了解视力状况,眼外观是否正常，通过眼底镜检查眼底视网膜、视神经、视乳头和视网膜中央血管等有无异常情况，通过裂隙灯检查巩膜、虹膜、角膜、瞳孔、玻璃体、晶体等有无异常情况。</td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">耳鼻、口咽</td><td class="q-gp"></td><td class="q-mn">通过对耳、鼻、咽、扁桃体的常规检查，初步筛查相关常见疾病。</td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">牙体,牙周,口腔粘膜,颌面部</td><td class="q-gp"></td><td class="q-mn">主要检查有无牙周病、牙结石、龋齿、缺牙等口腔疾病。</td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">妇科内诊</td><td class="q-gp"></td><td class="q-mn">通过妇科体格检查，检查阴道、子宫、附件、盆腔等脏器基本情况，发现常见妇科疾病的相关征兆，或初步排除妇科常见疾病。</td><td>/</td><td>/</td><td>9</td></tr><tr><td class="q-nm">白带常规3项</td><td class="q-gp"></td><td class="q-mn">了解阴道清洁度情况及妇科炎症，如：外阴阴道假丝酵母菌病、滴虫性阴道炎等均具有重要的意义。</td><td>/</td><td>/</td><td>8.28</td></tr><tr><td class="q-nm">子宫颈抹片检查（液基超薄细胞检测,TCT）</td><td class="q-gp"></td><td class="q-mn">筛查宫颈早期病变较先进的检测方法，同时还能发现部分微生物感染如假丝酵母菌、滴虫等。</td><td>/</td><td>/</td><td>216</td></tr><tr><td class="q-nm">人乳头瘤病毒(HPV16/18-DNA)定性</td><td class="q-gp"></td><td class="q-mn">16型和18型高危型人乳头瘤病毒感染的辅助诊断，发现宫颈癌的高危人群。</td><td>/</td><td>/</td><td>317.4</td></tr><tr class="q-cat"><td colspan="6">生化检查项目</td></tr><tr><td class="q-nm">血常规18项/22项</td><td class="q-gp"></td><td class="q-mn">通过血液常规检测，检查白细胞、红细胞、血色素、血小板等指标来反映身体状况，如：贫血、感染、血液系统疾病、物理化学因素损伤等。</td><td>18.4</td><td>18.4</td><td>18.4</td></tr><tr><td class="q-nm">尿常规15项</td><td class="q-gp"></td><td class="q-mn">筛查泌尿系统疾病简单并且准确的方法。如泌尿系统感染、肿瘤、结石及了解肾功能，还可用于协助检查其他系统疾病，如糖尿病、肾炎等。</td><td>11.5</td><td>11.5</td><td>11.5</td></tr><tr><td class="q-nm">空腹血糖（GLU）</td><td class="q-gp"></td><td class="q-mn">评价人体空腹状态下糖代谢是否正常，评估糖尿病受检者空腹血糖控制是否达标。空腹血糖是评估糖代谢紊乱的常用和重要指标。</td><td>5.52</td><td>5.52</td><td>5.52</td></tr><tr><td class="q-nm">尿素（Urea）</td><td class="q-gp"></td><td class="q-mn">血清尿素是人体蛋白质的代谢产物，主要是经肾脏滤过而随尿液排出体外，当肾功能损害时，体内代谢产物堆积，血液中血清尿素浓度增加，此时血清中尿素氮数值升高，因此通过测定尿素，可了解肾脏功能。</td><td>18.4</td><td>18.4</td><td>18.4</td></tr><tr><td class="q-nm">肌酐（Cr）</td><td class="q-gp"></td><td class="q-mn">血清肌酐浓度可在一定程度上准确反映肾脏滤过功能的损害程度。肾功能正常时，肌酐排出率恒定，当肾实质受到损害时，肾脏的滤过率就会降低。当滤过率降低到一定程度后，血肌酐浓度就会急剧上升。</td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">尿酸（UA）</td><td class="q-gp"></td><td class="q-mn">尿酸是体内嘌呤代谢的终末产物。主要经肾脏排泄，因而测定尿酸能够了解肾脏的功能，增高见于：痛风、肾脏病变、恶性肿瘤等。</td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">丙氨酸氨基转移酶（ALT）</td><td class="q-gp"></td><td class="q-mn">是检查肝脏损害最灵敏的检查项目</td><td>13.8</td><td>13.8</td><td>13.8</td></tr><tr><td class="q-nm">天门冬氨酸氨基转移酶（AST）</td><td class="q-gp"></td><td class="q-mn">肝脏,肌肉及心肌损害时升高</td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">γ-谷氨酰转移酶（GGT</td><td class="q-gp"></td><td class="q-mn">最常用于筛检肝脏机能障碍、肝硬化及酒精性肝损害</td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">碱性磷酸酶（ALP）</td><td class="q-gp"></td><td class="q-mn">增高时多为肝胆、骨骼及甲状旁腺疾患</td><td>4.6</td><td>4.6</td><td>4.6</td></tr><tr><td class="q-nm">ALT/AST</td><td class="q-gp"></td><td class="q-mn">当天门冬氨酸氨基转移酶（AST）明显升高时，天门冬氨酸氨基转移酶（AST）/丙氨酸氨基转移酶（ALT）大于1时，提示有肝实质的广泛损害，预后不良。</td><td>含</td><td>含</td><td>含</td></tr><tr><td class="q-nm">总胆红素（TBIL）</td><td class="q-gp"></td><td class="q-mn">总胆红素高值时可能有肝胆系统或溶血性疾病</td><td>9.2</td><td>9.2</td><td>9.2</td></tr><tr><td class="q-nm">直接胆红素（DBIL）</td><td class="q-gp"></td><td class="q-mn">直接胆红素高值时可能有肝胆系统疾病</td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">间接胆红素（IBIL）</td><td class="q-gp"></td><td class="q-mn">间接胆红素高值时可能有溶血性黄疸。</td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">总胆固醇(TC)</td><td class="q-gp"></td><td class="q-mn">血清中胆固醇含量过高易引起脂肪肝、动脉硬化、脑中风、胆结石等疾病。</td><td>29.44</td><td>29.44</td><td>29.44</td></tr><tr><td class="q-nm">甘油三酯（TG）</td><td class="q-gp"></td><td class="q-mn">来自脂类及碳水化合物(米饭,面包等谷类)，当数值偏高则易患动脉硬化、心肌梗塞、肥胖症、脂肪肝等疾病。</td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">高密度脂蛋白胆固醇（HDL-CHO）</td><td class="q-gp"></td><td class="q-mn">对血管有保护作用，血中含量低则易患血管硬化。</td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">低密度脂蛋白胆固醇（LDL-CHO）</td><td class="q-gp"></td><td class="q-mn">越高越不好，是检测动脉硬化的重要指标。</td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">癌胚抗原（CEA）定量</td><td class="q-gp"></td><td class="q-mn">是一种广谱的肿瘤标志物，常用于消化道筛肠癌的筛查。</td><td>35</td><td>35</td><td>35</td></tr><tr><td class="q-nm">甲胎蛋白（AFP）定量</td><td class="q-gp"></td><td class="q-mn">是目前临床上诊断肝癌的重要指标(筛查肝癌时最好配合腹部B超检查)。</td><td>35</td><td>35</td><td>35</td></tr><tr><td class="q-nm">癌抗原19-9（CA19-9）</td><td class="q-gp"></td><td class="q-mn">CA19-9是筛查胰腺癌的重要肿瘤标志物，此外胃肠道、肝胆和某些妇科肿瘤也可以增高。CA50主要用于胰腺及消化道肿瘤筛查，多数情况下其灵敏度略逊于CA19-9。所以通常情况下这两种肿瘤标志物可以仅选用CA19-9进行检查。适合消化道肿瘤筛查</td><td>50</td><td>50</td><td>50</td></tr><tr><td class="q-nm">癌抗原15-3（CA15-3）</td><td class="q-gp"></td><td class="q-mn">乳腺癌的首选标志物，其他如转移性卵巢癌、结肠癌、肝癌、胆管癌、胰腺癌、肺癌等也有不同程度的增高。</td><td>/</td><td>50</td><td>50</td></tr><tr><td class="q-nm">癌抗原125（CA125）（女）</td><td class="q-gp"></td><td class="q-mn">是重要的卵巢癌肿瘤标志物，其他非卵巢恶性肿瘤也有一定的阳性率，如乳腺癌40%、胰腺癌50%、胃癌47%、肺癌44%、结肠直肠癌32%、其他妇科肿瘤43%。对于肺癌患者，CA125的阳性率随肺癌分期进展而明显升高，临床研究表明[1]：肺癌I期阳性率为7.8%，II期阳性率为18.6%，III期为32.5%，IV期为53.9%，总体阳性率为26.9%</td><td>/</td><td>50</td><td>50</td></tr><tr><td class="q-nm">前列腺特异性抗原(T-PSA)</td><td class="q-gp"></td><td class="q-mn">前列腺癌与良性前列腺疾病之间的T-PSA浓度分布有一定的重叠性(4-10ug/l),故前列腺癌早期单测T-PSA诊断意义不大，若联合F-PSA检测，用F-PSA/ T-PSA的比值对判断前列腺肿瘤的性质有重大的价值，F/T比值小于10%提示有前列腺癌，F/T比值大于25%提示前列腺增生</td><td>50</td><td>/</td><td>/</td></tr><tr><td class="q-nm">游离前列腺特异性抗原(F-PSA)</td><td class="q-gp"></td><td class="q-mn"></td><td>50</td><td>/</td><td>/</td></tr><tr><td class="q-nm">三碘甲状腺原氨酸（T3）</td><td class="q-gp"></td><td class="q-mn">用于诊断甲亢、甲减，并作为甲状腺肿瘤术后治疗监测。</td><td>141.68</td><td>141.68</td><td>141.68</td></tr><tr><td class="q-nm">甲状腺素（T4）</td><td class="q-gp"></td><td class="q-mn"></td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">促甲状腺素（TSH）</td><td class="q-gp"></td><td class="q-mn"></td><td>/</td><td>/</td><td>/</td></tr><tr><td class="q-nm">C13呼气试验(HP)</td><td class="q-gp"></td><td class="q-mn">碳13-尿素呼气试验阳性示有幽门螺杆菌感染，它与胃部炎症、消化性溃疡、胃癌的发生密切关联。该方法具有无痛、快速、准确的特点。</td><td>120</td><td>120</td><td>120</td></tr><tr class="q-cat"><td colspan="6">超声检查项目</td></tr><tr><td class="q-nm">低剂量肺部CT</td><td class="q-gp"></td><td class="q-mn">低辐射剂量胸部扫描，辐射剂量仅为常规CT的20％左右。低剂量螺旋CT对肺部筛查有助于发现早期肺癌，特别是周围型肺癌，其诊出率约为胸片的10倍。因其较少的辐射剂量，有效的降低了医源性辐射引起的恶性病变的风险。</td><td>286</td><td>286</td><td>286</td></tr><tr><td class="q-nm">肝胆脾胰肾超声检查</td><td class="q-gp"></td><td class="q-mn">通过彩色超声仪器对人体肝脏、胆囊、脾脏、胰脏、双肾进行检测,是否有无形态学改变及占位性病变（肿瘤，结石，炎症等）。</td><td>125</td><td>125</td><td>125</td></tr><tr><td class="q-nm">男科前列腺超声波检查（男）</td><td class="q-gp"></td><td class="q-mn">通过彩色超声波仪器检测前列腺有无肿块及其他病变。</td><td>125</td><td>/</td><td>/</td></tr><tr><td class="q-nm">妇科腹部超声检查（女未婚）</td><td class="q-gp"></td><td class="q-mn">通过彩色超声波仪器检测子宫及附件有无病变。</td><td>/</td><td>125</td><td>/</td></tr><tr><td class="q-nm">妇科阴道超声检查（女已婚）</td><td class="q-gp"></td><td class="q-mn">通过彩色超声波仪器检测子宫及附件有无病变。</td><td>/</td><td>/</td><td>134</td></tr><tr><td class="q-nm">乳房超声检查（女）</td><td class="q-gp"></td><td class="q-mn">通过彩色超声波仪器检测乳腺有无肿块及其他病变。</td><td>/</td><td>125</td><td>125</td></tr><tr><td class="q-nm">甲状腺超声检查</td><td class="q-gp"></td><td class="q-mn">通过彩色超声仪器对人体甲状腺进行检测,是否有无形态学改变及占位性病变（肿大、结节、腺瘤及肿瘤等）。</td><td>125</td><td>125</td><td>125</td></tr><tr><td class="q-nm">颈动脉超声检查</td><td class="q-gp"></td><td class="q-mn">通过彩色超声仪器来检测有无动脉粥样硬化情况及颈动脉情况。</td><td>210</td><td>210</td><td>210</td></tr><tr><td class="q-nm">静态心电图检查(ECG)</td><td class="q-gp"></td><td class="q-mn">通过在体表特定部位同步记录和分析心脏每一个心动周期所产生电活动变化的曲线图形，为心脏疾病诊断、疗效评价、预后评估提供重要的依据。</td><td>30</td><td>30</td><td>30</td></tr><tr class="q-cat"><td colspan="6">附加项目</td></tr><tr><td class="q-nm">健康早餐</td><td class="q-gp"></td><td class="q-mn">营养早餐</td><td>赠送</td><td>赠送</td><td>赠送</td></tr><tr><td class="q-nm">电子报告</td><td class="q-gp"></td><td class="q-mn">含电子胶片</td><td>赠送</td><td>赠送</td><td>赠送</td></tr><tr><td class="q-nm">抽血费（红+紫+粉）</td><td class="q-gp"></td><td class="q-mn"></td><td>5.93</td><td>5.93</td><td>5.93</td></tr></tbody></table>
+        
+        <div class="q-sub">报价单条款与说明（原文摘录）</div>
+        <ul class="q-notes"><li>折扣前小计（报价单 R59）：男性 1,546.47 元 / 女性未婚 1,671.47 元 / 女性已婚 2,231.15 元。</li><li>实际折扣率：男性 8.53 折 / 女性未婚 8.49 折 / 女性已婚 8.38 折（非整数折扣）。</li><li>低剂量肺部 CT 备注栏标注为「胸部 CT 平扫 + 薄层【不含胶片】」，口径与瑞慈的「低剂量」不一致。</li><li>表中「/」表示该人群不包含此项；数字为该机构的项目编号。</li></ul><ul class="q-warn"><li>逐项加总与报价单小计不符：男性与女性未婚逐项相加均比小计多 125.00 元，差额恰为「男科前列腺超声波检查（男）125 元」，疑该行未计入小计。建议向院方书面确认。</li></ul>
+        <div class="q-src">数据来源：珠江医院报价单，逐项摘录，未作增删。</div>
+      </div>
+    </details>
+    </div>
+
+    <div class="note">
+      <strong>数据来源：</strong>瑞慈体检套餐附表、广医二院体检确认单（2026-9-21 版）、珠江医院体检报价单 —— 均逐项溯源核对，无推算、无编造。<br>
+      <strong>注1：</strong>珠江医院该项名称为「低剂量肺部CT」，但报价单备注栏标注为「胸部CT平扫+薄层【不含胶片】」，口径以备注为准。<br>
+      <strong>注2：</strong>广医二院肿瘤标志物含「肿瘤3项（AFP/CEA/CA19-9）」及男性「前列腺抗原2项（TPSA/FPSA）」，
+      另有 EB 病毒抗体（鼻咽癌早筛，属病毒抗体筛查）未计入上表项数。<br>
+      <strong>注3：</strong>广医二院报价单（2026-9-21 版）最终价格口径为「原价×9折＋材料费」：男性 1,180.20 元、
+      女未婚 1,262.99 元、女已婚 1,722.91 元。其中女已婚档隐含折扣为 8.80 折（非 9 折），建议签约前向院方书面确认。
+    </div>
+
+    <div class="foot">
+      内部呈报用 · 2026年9月21日更新（广医二院报价已按最新版本修订） · 本页仅作方案对比，不含推荐意见 · 如有歧义以三家机构原始报价单及书面确认为准
+    </div>
+  </div>
+</div>
+
+<div id="shotbar">
+  <button id="shotBtn" title="截取整个页面为图片">📸 截取整页</button>
+  <span id="shotTip">截图将自动下载为 PNG 图片，可贴入汇报材料</span>
+</div>
+
+<script>
+(function(){
+  var btn = document.getElementById('shotBtn');
+  var tip = document.getElementById('shotTip');
+  // 生成设备像素比对应的高清晰度画布
+  function makeHighResCanvas(srcCanvas, scale){
+    var w = srcCanvas.width, h = srcCanvas.height;
+    var c = document.createElement('canvas');
+    c.width = w * scale;
+    c.height = h * scale;
+    var ctx = c.getContext('2d');
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, c.width, c.height);
+    ctx.drawImage(srcCanvas, 0, 0, w, h, 0, 0, c.width, c.height);
+    return c;
+  }
+
+  function doShot(){
+    var wrap = document.querySelector('.wrap');
+    if(!wrap){ return; }
+    btn.disabled = true;
+    var oldText = btn.innerText;
+    btn.innerText = '⏳ 正在生成截图...';
+    // 滚动到顶部，避免视觉缺失
+    window.scrollTo(0, 0);
+
+    html2canvas(wrap, {
+      backgroundColor: '#f8fafc',
+      scale: 2,                 // 2倍分辨率，文字更清晰
+      useCORS: true,
+      logging: false
+    }).then(function(canvas){
+      var finalCanvas = makeHighResCanvas(canvas, 2);
+      var link = document.createElement('a');
+      link.download = '2026员工体检方案对比.png';
+      link.href = finalCanvas.toDataURL('image/png');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      btn.innerText = '✅ 截图已下载';
+      tip.innerText = '已保存为「2026员工体检方案对比.png」，可贴入汇报材料';
+      setTimeout(function(){
+        btn.innerText = oldText;
+        btn.disabled = false;
+        tip.innerText = '截图将自动下载为 PNG 图片，可贴入汇报材料';
+      }, 3000);
+    }).catch(function(err){
+      console.error(err);
+      btn.innerText = '❌ 截图失败，请改用浏览器打印';
+      setTimeout(function(){
+        btn.innerText = oldText;
+        btn.disabled = false;
+      }, 3000);
+    });
+  }
+
+  btn.addEventListener('click', doShot);
+
+  // 键盘快捷键：Ctrl+Shift+S / Cmd+Shift+S 触发截图
+  document.addEventListener('keydown', function(e){
+    if((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'S' || e.key === 's')){
+      e.preventDefault();
+      doShot();
+    }
+  });
+})();
+</script>
+
+</html>
